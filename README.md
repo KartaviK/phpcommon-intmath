@@ -1,13 +1,10 @@
 # PHPCommon IntMath
 
-[![Build Status](https://travis-ci.org/marcospassos/phpcommon-intmath.svg?branch=master)](https://travis-ci.org/marcospassos/phpcommon-intmath)
-[![Code Coverage](https://scrutinizer-ci.com/g/marcospassos/phpcommon-intmath/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/marcospassos/phpcommon-intmath/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/marcospassos/phpcommon-intmath/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/marcospassos/phpcommon-intmath/?branch=master)
+[![Build Status](https://travis-ci.com/KartaviK/phpcommon-intmath.svg?branch=master)](https://travis-ci.com/KartaviK/phpcommon-intmath)
+[![Code Coverage](https://scrutinizer-ci.com/g/KartaviK/phpcommon-intmath/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/marcospassos/phpcommon-intmath/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/KartaviK/phpcommon-intmath/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/marcospassos/phpcommon-intmath/?branch=master)
 [![StyleCI](https://styleci.io/repos/60445417/shield)](https://styleci.io/repos/60445417)
-[![Latest Stable Version](https://poser.pugx.org/phpcommon/intmath/v/stable)](https://packagist.org/packages/phpcommon/intmath)
-[![Dependency Status](https://www.versioneye.com/user/projects/5753c83a7757a0003bd4af4a/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5753c83a7757a0003bd4af4a)
-
-Latest release: [1.0.0-beta](https://packagist.org/packages/phpcommon/intmath#1.0.0)
+[![Latest Stable Version](https://poser.pugx.org/kartavik/php-intmath/v/stable)](https://packagist.org/packages/phpcommon/intmath)
 
 PHP 5.3+ library for arithmetic operations on integers that wraps around upon
 overflow.
