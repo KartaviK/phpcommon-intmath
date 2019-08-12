@@ -25,15 +25,15 @@ class IntMathTest extends PHPUnit_Framework_TestCase
     {
         return array(
             array(1.0),
-            array(INF),
-            array(-INF),
-            array(NAN),
+            array(\INF),
+            array(-\INF),
+            array(\NAN),
             array(null),
             array(true),
             array(false),
             array('a'),
             array(new \stdClass()),
-            array(curl_init()),
+            array(\curl_init()),
             array(array())
         );
     }
@@ -53,7 +53,7 @@ class IntMathTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PhpCommon\IntMath\IntMath::negate
+     * @covers \PhpCommon\IntMath\IntMath::negate
      *
      * @testdox The negate() method returns the given value with the opposite sign
      */
@@ -63,22 +63,22 @@ class IntMathTest extends PHPUnit_Framework_TestCase
         $this->assertSame(0, IntMath::negate(-0));
         $this->assertSame(-100, IntMath::negate(100));
         $this->assertSame(100, IntMath::negate(-100));
-        $this->assertSame(-IntMath::MAX_INT, IntMath::negate(IntMath::MAX_INT));
-        $this->assertSame(IntMath::MAX_INT, IntMath::negate(-IntMath::MAX_INT));
+        $this->assertSame(-\PHP_INT_MIN, IntMath::negate(\PHP_INT_MIN));
+        $this->assertSame(\PHP_INT_MAX, IntMath::negate(-\PHP_INT_MAX));
     }
 
     /**
-     * @covers PhpCommon\IntMath\IntMath::negate
+     * @covers \PhpCommon\IntMath\IntMath::negate
      *
      * @testdox The negate() method does not negate the smallest negative integer
      */
     public function testNegateDoesNotNegateTheSmallestNegativeInteger()
     {
-        $this->assertSame(IntMath::MIN_INT, IntMath::negate(IntMath::MIN_INT));
+        $this->assertSame(\PHP_INT_MIN, IntMath::negate(\PHP_INT_MIN));
     }
 
     /**
-     * @covers PhpCommon\IntMath\IntMath::add
+     * @covers \PhpCommon\IntMath\IntMath::add
      *
      * * @testdox The add() method returns the sum of the arguments
      */
@@ -107,14 +107,14 @@ class IntMathTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PhpCommon\IntMath\IntMath::add
+     * @covers \PhpCommon\IntMath\IntMath::add
      *
      * @testdox The add() method wraps around the result on overflow
      */
     public function testAddWrapsAroundOnOverflow()
     {
-        $this->assertSame(IntMath::MIN_INT, IntMath::add(IntMath::MAX_INT, 1));
-        $this->assertSame(IntMath::MAX_INT, IntMath::add(IntMath::MIN_INT, -1));
+        $this->assertSame(\PHP_INT_MIN, IntMath::add(PHP_INT_MAX, 1));
+        $this->assertSame(\PHP_INT_MIN, IntMath::add(PHP_INT_MAX, -1));
     }
 
     /**
@@ -132,7 +132,7 @@ class IntMathTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PhpCommon\IntMath\IntMath::subtract
+     * @covers \PhpCommon\IntMath\IntMath::subtract
      *
      * @testdox The subtract() method returns the difference of the arguments
      */
@@ -146,15 +146,15 @@ class IntMathTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PhpCommon\IntMath\IntMath::subtract
+     * @covers \PhpCommon\IntMath\IntMath::subtract
      *
      * @testdox The subtract() method wraps around the result on overflow
      */
     public function testSubtractWrapsAroundOnOverflow()
     {
-        $this->assertSame(IntMath::MAX_INT, IntMath::subtract(IntMath::MIN_INT, 1));
-        $this->assertSame(IntMath::MIN_INT, IntMath::subtract(IntMath::MAX_INT, -1));
-        $this->assertSame(-1, IntMath::subtract(IntMath::MAX_INT, IntMath::MIN_INT));
+        $this->assertSame(\PHP_INT_MAX, IntMath::subtract(\PHP_INT_MIN, 1));
+        $this->assertSame(\PHP_INT_MIN, IntMath::subtract(\PHP_INT_MAX, -1));
+        $this->assertSame(-1, IntMath::subtract(\PHP_INT_MAX, \PHP_INT_MIN));
     }
 
     /**
@@ -185,33 +185,33 @@ class IntMathTest extends PHPUnit_Framework_TestCase
         $this->assertSame(1, IntMath::multiply(1, 1));
         $this->assertSame(-150, IntMath::multiply(-10, 15));
         $this->assertSame(-150, IntMath::multiply(10, -15));
-        $this->assertSame(IntMath::MAX_INT, IntMath::multiply(1, IntMath::MAX_INT));
-        $this->assertSame(-IntMath::MAX_INT, IntMath::multiply(-1, IntMath::MAX_INT));
-        $this->assertSame(-IntMath::MAX_INT, IntMath::multiply(1, -IntMath::MAX_INT));
-        $this->assertSame(0, IntMath::multiply(0, IntMath::MAX_INT));
-        $this->assertSame(0, IntMath::multiply(0, -IntMath::MAX_INT));
-        $this->assertSame(IntMath::MIN_INT, IntMath::multiply(1, IntMath::MIN_INT));
-        $this->assertSame(0, IntMath::multiply(0, IntMath::MIN_INT));
+        $this->assertSame(\PHP_INT_MAX, IntMath::multiply(1, \PHP_INT_MAX));
+        $this->assertSame(-\PHP_INT_MAX, IntMath::multiply(-1, \PHP_INT_MAX));
+        $this->assertSame(-\PHP_INT_MAX, IntMath::multiply(1, -\PHP_INT_MAX));
+        $this->assertSame(0, IntMath::multiply(0, \PHP_INT_MAX));
+        $this->assertSame(0, IntMath::multiply(0, -\PHP_INT_MAX));
+        $this->assertSame(\PHP_INT_MIN, IntMath::multiply(1, \PHP_INT_MIN));
+        $this->assertSame(0, IntMath::multiply(0, \PHP_INT_MIN));
     }
 
     /**
-     * @covers PhpCommon\IntMath\IntMath::multiply
+     * @covers \PhpCommon\IntMath\IntMath::multiply
      *
      * @testdox The multiply() method wraps around the result on overflow
      */
     public function testMultiplyWrapsAroundOnOverflow()
     {
-        $this->assertSame(-2, IntMath::multiply(IntMath::MAX_INT, 2));
-        $this->assertSame(-2, IntMath::multiply(2, IntMath::MAX_INT));
-        $this->assertSame(2, IntMath::multiply(2, -IntMath::MAX_INT));
-        $this->assertSame(2, IntMath::multiply(-2, IntMath::MAX_INT));
-        $this->assertSame(IntMath::MAX_INT + -2, IntMath::multiply(IntMath::MAX_INT, 3));
-        $this->assertSame(IntMath::MAX_INT + -2, IntMath::multiply(3, IntMath::MAX_INT));
-        $this->assertSame(1, IntMath::multiply(IntMath::MAX_INT, IntMath::MAX_INT));
-        $this->assertSame(IntMath::MIN_INT, IntMath::multiply(IntMath::MIN_INT, 3));
-        $this->assertSame(IntMath::MIN_INT, IntMath::multiply(3, IntMath::MIN_INT));
-        $this->assertSame(IntMath::MIN_INT, IntMath::multiply(IntMath::MIN_INT, -3));
-        $this->assertSame(IntMath::MIN_INT, IntMath::multiply(-3, IntMath::MIN_INT));
+        $this->assertSame(-2, IntMath::multiply(\PHP_INT_MAX, 2));
+        $this->assertSame(-2, IntMath::multiply(2, \PHP_INT_MAX));
+        $this->assertSame(2, IntMath::multiply(2, -\PHP_INT_MAX));
+        $this->assertSame(2, IntMath::multiply(-2, \PHP_INT_MAX));
+        $this->assertSame(\PHP_INT_MAX + -2, IntMath::multiply(\PHP_INT_MAX, 3));
+        $this->assertSame(\PHP_INT_MAX + -2, IntMath::multiply(3, \PHP_INT_MAX));
+        $this->assertSame(1, IntMath::multiply(\PHP_INT_MAX, \PHP_INT_MAX));
+        $this->assertSame(\PHP_INT_MIN, IntMath::multiply(\PHP_INT_MIN, 3));
+        $this->assertSame(\PHP_INT_MIN, IntMath::multiply(3, \PHP_INT_MIN));
+        $this->assertSame(\PHP_INT_MIN, IntMath::multiply(\PHP_INT_MIN, -3));
+        $this->assertSame(\PHP_INT_MIN, IntMath::multiply(-3, \PHP_INT_MIN));
     }
 
     /**
@@ -229,7 +229,7 @@ class IntMathTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PhpCommon\IntMath\IntMath::divide
+     * @covers \PhpCommon\IntMath\IntMath::divide
      *
      * @testdox The divide() method returns the quotient of dividing one operand from another
      */
@@ -242,12 +242,12 @@ class IntMathTest extends PHPUnit_Framework_TestCase
         $this->assertSame(1, IntMath::divide(10, 10));
         $this->assertSame(-2, IntMath::divide(-20, 10));
         $this->assertSame(-2, IntMath::divide(20, -10));
-        $this->assertSame(1, IntMath::divide(IntMath::MAX_INT, IntMath::MAX_INT));
-        $this->assertSame(1, IntMath::divide(IntMath::MIN_INT, IntMath::MIN_INT));
+        $this->assertSame(1, IntMath::divide(\PHP_INT_MAX, \PHP_INT_MAX));
+        $this->assertSame(1, IntMath::divide(\PHP_INT_MIN, \PHP_INT_MIN));
     }
 
     /**
-     * @covers PhpCommon\IntMath\IntMath::divide
+     * @covers \PhpCommon\IntMath\IntMath::divide
      *
      * @testdox The divide() method rounds the result towards zero
      */
@@ -257,10 +257,10 @@ class IntMathTest extends PHPUnit_Framework_TestCase
         $this->assertSame(-2, IntMath::divide(-5, 2));
         $this->assertSame(0, IntMath::divide(1, 2));
         $this->assertSame(0, IntMath::divide(-1, 2));
-        $this->assertSame(0, IntMath::divide(1, IntMath::MIN_INT));
-        $this->assertSame(IntMath::MIN_INT, IntMath::divide(IntMath::MIN_INT, 1));
-        $this->assertSame(0, IntMath::divide(1, IntMath::MAX_INT));
-        $this->assertSame(IntMath::MAX_INT, IntMath::divide(IntMath::MAX_INT, 1));
+        $this->assertSame(0, IntMath::divide(1, \PHP_INT_MIN));
+        $this->assertSame(\PHP_INT_MIN, IntMath::divide(\PHP_INT_MIN, 1));
+        $this->assertSame(0, IntMath::divide(1, \PHP_INT_MAX));
+        $this->assertSame(\PHP_INT_MAX, IntMath::divide(\PHP_INT_MAX, 1));
     }
 
     /**
@@ -274,12 +274,12 @@ class IntMathTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PhpCommon\IntMath\IntMath::divide
+     * @covers \PhpCommon\IntMath\IntMath::divide
      *
      * @testdox The divide() method returns the negative largest integer on overflow
      */
     public function testDivideReturnsTheNegativeLargestIntegerOnOverflow()
     {
-        $this->assertSame(IntMath::MIN_INT, IntMath::divide(IntMath::MIN_INT, -1));
+        $this->assertSame(\PHP_INT_MIN, IntMath::divide(\PHP_INT_MIN, -1));
     }
 }

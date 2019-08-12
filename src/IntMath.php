@@ -15,7 +15,7 @@ use InvalidArgumentException;
 
 // Only available on PHP >= 7
 if (!defined('PHP_INT_MIN')) {
-    define('PHP_INT_MIN', -PHP_INT_MAX - 1);
+    define('PHP_INT_MIN', -\PHP_INT_MAX - 1);
 }
 
 /**
@@ -57,16 +57,6 @@ if (!defined('PHP_INT_MIN')) {
 class IntMath
 {
     /**
-     * The largest supported integer
-     */
-    const MAX_INT = PHP_INT_MAX;
-
-    /**
-     * The smallest supported integer
-     */
-    const MIN_INT = PHP_INT_MIN;
-
-    /**
      * Returns the negation of the argument.
      *
      * For integer values, negation is the same as subtraction from zero.
@@ -87,7 +77,7 @@ class IntMath
     {
         self::assertInteger($a);
 
-        if ($a === self::MIN_INT) {
+        if ($a === \PHP_INT_MIN) {
             return $a;
         }
 
@@ -116,11 +106,11 @@ class IntMath
         self::assertInteger($a);
         self::assertInteger($b);
 
-        if (($b > 0) && ($a <= (PHP_INT_MAX - $b))) {
+        if (($b > 0) && ($a <= (\PHP_INT_MAX - $b))) {
             return $a + $b;
         }
 
-        if (($b < 0) && ($a >= (PHP_INT_MIN - $b))) {
+        if (($b < 0) && ($a >= (\PHP_INT_MIN - $b))) {
             return $a + $b;
         }
 
@@ -163,7 +153,7 @@ class IntMath
         self::assertInteger($a);
         self::assertInteger($b);
 
-        return self::add((int) $a, self::negate($b));
+        return self::add((int)$a, self::negate($b));
     }
 
     /**
@@ -195,19 +185,19 @@ class IntMath
         // If the multiplicand or the multiplier are the smallest integer
         // supported, then the product is `0` or the smallest integer supported,
         // according as the other operand is odd or even respectively.
-        if ($a === self::MIN_INT) {
+        if ($a === \PHP_INT_MIN) {
             return $b & 0x01 ? $a : 0;
         }
 
-        if ($b === self::MIN_INT) {
+        if ($b === \PHP_INT_MIN) {
             return $a & 0x01 ? $b : 0;
         }
 
-        $max = self::MIN_INT;
+        $max = \PHP_INT_MIN;
 
         // Same sign
         if ($a >= 0 && $b >= 0 || $a < 0 && $b < 0) {
-            $max = self::MAX_INT;
+            $max = \PHP_INT_MAX;
         }
 
         // Use native operators unless the operation causes an overflow
@@ -217,7 +207,7 @@ class IntMath
 
         // Signed multiplication can be accomplished by doing an unsigned
         // multiplication and taking manually care of the negative-signs.
-        $sign = false;
+        $sign = \false;
 
         if ($a < 0) {
             // Toggle the signed flag
@@ -291,7 +281,7 @@ class IntMath
             throw new DivisionByZeroException('Division by zero.');
         }
 
-        if ($a === self::MIN_INT && $b === -1) {
+        if ($a === \PHP_INT_MIN && $b === -1) {
             return $a;
         }
 
@@ -307,11 +297,11 @@ class IntMath
      */
     private static function assertInteger($value)
     {
-        if (is_int($value)) {
+        if (\is_int($value)) {
             return;
         }
 
-        throw new InvalidArgumentException(sprintf(
+        throw new InvalidArgumentException(\sprintf(
             'Expected an integer, but got "%s"',
             self::identify($value)
         ));
@@ -326,15 +316,15 @@ class IntMath
      */
     private static function identify($value)
     {
-        if (!is_numeric($value) || !is_float($value)) {
-            return gettype($value);
+        if (!\is_numeric($value) || !\is_float($value)) {
+            return \gettype($value);
         }
 
-        if (is_infinite($value)) {
+        if (\is_infinite($value)) {
             return $value < 0 ? '-INF' : 'INF';
         }
 
-        if (is_nan($value)) {
+        if (\is_nan($value)) {
             return 'NAN';
         }
 
