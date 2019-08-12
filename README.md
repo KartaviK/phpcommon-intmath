@@ -1,10 +1,10 @@
 # PHPCommon IntMath
 
 [![Build Status](https://travis-ci.com/KartaviK/phpcommon-intmath.svg?branch=master)](https://travis-ci.com/KartaviK/phpcommon-intmath)
-[![Code Coverage](https://scrutinizer-ci.com/g/KartaviK/phpcommon-intmath/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/marcospassos/phpcommon-intmath/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/KartaviK/phpcommon-intmath/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/marcospassos/phpcommon-intmath/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/KartaviK/phpcommon-intmath/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/KartaviK/phpcommon-intmath/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/KartaviK/phpcommon-intmath/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/KartaviK/phpcommon-intmath/?branch=master)
 [![StyleCI](https://styleci.io/repos/201909386/shield)](https://styleci.io/repos/201909386)
-[![Latest Stable Version](https://poser.pugx.org/kartavik/php-intmath/v/stable)](https://packagist.org/packages/phpcommon/intmath)
+[![Latest Stable Version](https://poser.pugx.org/kartavik/php-intmath/v/stable)](https://packagist.org/packages/kartavik/php-intmath)
 
 PHP 5.3+ library for arithmetic operations on integers that wraps around upon
 overflow.
