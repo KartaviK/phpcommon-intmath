@@ -47,7 +47,7 @@ browser.
 Use [Composer][link-composer] to install the package:
 
 ```sh
-$ composer require phpcommon/intmath
+$ composer require kartavik/php-intmath
 ```
 
 ## Operations
@@ -167,7 +167,8 @@ marcos@marcospassos.com instead of using the issue tracker.
 
 ## Credits
 
-* [Marcos Passos][link-author]
+* [Marcos Passos][link-source-author]
+* [Roman Varkuta][link-author]
 - [All Contributors][link-contributors]
 
 ## License
@@ -177,7 +178,8 @@ All contents of this package are licensed under the [MIT license](LICENSE).
 [link-api-doc]: http://marcospassos.github.io/phpcommon-intmath/docs/api
 [link-testsdoc]: http://marcospassos.github.io/phpcommon-intmath/docs/test
 [link-composer]: https://getcomposer.org
-[link-author]: http://github.com/marcospassos
-[link-contributors]: https://github.com/marcospassos/phpcommon-intmath/graphs/contributors
-[link-issue-tracker]: https://github.com/marcospassos/phpcommon-intmath/issues
-[link-repository]: https://github.com/marcospassos/phpcommon-intmath
+[link-source-author]: http://github.com/marcospassos
+[link-author]: http://github.com/Kartavik
+[link-contributors]: https://github.com/Kartavik/phpcommon-intmath/graphs/contributors
+[link-issue-tracker]: https://github.com/Kartavik/phpcommon-intmath/issues
+[link-repository]: https://github.com/Kartavik/phpcommon-intmath
