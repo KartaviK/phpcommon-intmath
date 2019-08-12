@@ -1,6 +1,6 @@
 language: php
 
-sudo: required
+sudo: false
 
 php:
   - '5.4'
@@ -14,10 +14,17 @@ php:
   - hhvm
   - nightly
 
+matrix:
+  fast_finish: true
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 before_script:
   - if [[ $TRAVIS_PHP_VERSION = 'nightly' ]]; then curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar; fi
-  - travis_retry composer self-update
-  - travis_retry composer install --no-interaction --prefer-source
+  - composer self-update
+  - travis_retry composer install -n
 
 script:
   - vendor/bin/phpcs --standard=psr2 src/
