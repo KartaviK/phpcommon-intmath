@@ -1,9 +1,9 @@
 language: php
 
 dist: trusty
+sudo: required
 
 php:
-  - '5.3'
   - '5.4'
   - '5.5'
   - '5.6'
@@ -14,16 +14,6 @@ php:
   - '7.4snapshot'
   - hhvm
   - nightly
-
-matrix:
-  include:
-    - php: '5.3'
-      dist: precise
-  exclude:
-    - php: '5.3'
-      dist: trusty
-
-sudo: false
 
 before_script:
   - if [[ $TRAVIS_PHP_VERSION = 'nightly' ]]; then curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar; fi
