@@ -270,7 +270,7 @@ class IntMath
      *
      * @throws InvalidArgumentException If one of the arguments is not an
      *                                  integer.
-     * @throws DivisionByZeroException  If the divisor is zero.
+     * @throws \DivisionByZeroError  If the divisor is zero.
      */
     public static function divide($a, $b)
     {
@@ -278,7 +278,7 @@ class IntMath
         self::assertInteger($b);
 
         if (0 === $b) {
-            throw new DivisionByZeroException('Division by zero.');
+            throw new \DivisionByZeroError('Division by zero.');
         }
 
         if ($a === \PHP_INT_MIN && $b === -1) {
