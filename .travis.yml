@@ -15,6 +15,11 @@ php:
   - hhvm
   - nightly
 
+matrix:
+  include:
+    - php: '5.3'
+      dist: precise
+
 sudo: false
 
 before_script:
