@@ -43,12 +43,12 @@ class IntMathTest extends TestCase
      *
      * @dataProvider getNonIntegerValues
      *
+     * @expectedException \InvalidArgumentException
+     *
      * @testdox The negate() method throws an exception if the argument is not an integer
      */
     public function testNegateThrowsAnExceptionIfTheArgumentIsNotAnInteger($value)
     {
-        $this->expectException('InvalidArgumentException');
-
         IntMath::negate($value);
     }
 
@@ -97,12 +97,12 @@ class IntMathTest extends TestCase
      *
      * @dataProvider getNonIntegerValues
      *
+     * @expectedException \InvalidArgumentException
+     *
      * @testdox The add() method throws an exception if one of the arguments is not an integer
      */
     public function testAddThrowsAnExceptionIfOneOfTheArgumentIsNotAnInteger($value)
     {
-        $this->expectException('InvalidArgumentException');
-
         IntMath::add($value, $value);
     }
 
@@ -122,12 +122,12 @@ class IntMathTest extends TestCase
      *
      * @dataProvider getNonIntegerValues
      *
+     * @expectedException \InvalidArgumentException
+     *
      * @testdox The subtract() method throws an exception if one of the arguments is not an integer
      */
     public function testSubtractThrowsAnExceptionIfOneOfTheArgumentIsNotAnInteger($value)
     {
-        $this->expectException('InvalidArgumentException');
-
         IntMath::subtract($value, $value);
     }
 
@@ -162,12 +162,12 @@ class IntMathTest extends TestCase
      *
      * @dataProvider getNonIntegerValues
      *
+     * @expectedException \InvalidArgumentException
+     *
      * @testdox The multiply() method throws an exception if one of the arguments is not an integer
      */
     public function testMultiplyThrowsAnExceptionIfOneOfTheArgumentIsNotAnInteger($value)
     {
-        $this->expectException('InvalidArgumentException');
-
         IntMath::multiply($value, $value);
     }
 
@@ -219,12 +219,12 @@ class IntMathTest extends TestCase
      *
      * @dataProvider getNonIntegerValues
      *
+     * @expectedException \InvalidArgumentException
+     *
      * @testdox The divide() method throws an exception if one of the arguments is not an integer
      */
     public function testDivideThrowsAnExceptionIfOneOfTheArgumentIsNotAnInteger($value)
     {
-        $this->expectException('InvalidArgumentException');
-
         IntMath::divide($value, $value);
     }
 
@@ -265,11 +265,11 @@ class IntMathTest extends TestCase
 
     /**
      * @testdox The divide() method throws an exception when a division by zero occurs
+     *
+     * @expectedException \InvalidArgumentException
      */
     public function testDivideThrowsExceptionOnDivisionByZero()
     {
-        $this->expectException('\PhpCommon\IntMath\DivisionByZeroException');
-
         IntMath::divide(1, 0);
     }
 
