@@ -19,6 +19,9 @@ matrix:
   include:
     - php: '5.3'
       dist: precise
+  exclude:
+    - php: '5.3'
+      dist: trusty
 
 sudo: false
 
