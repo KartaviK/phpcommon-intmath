@@ -63,7 +63,7 @@ class IntMathTest extends TestCase
         $this->assertSame(0, IntMath::negate(-0));
         $this->assertSame(-100, IntMath::negate(100));
         $this->assertSame(100, IntMath::negate(-100));
-        $this->assertSame(-\PHP_INT_MIN, IntMath::negate(\PHP_INT_MIN));
+        $this->assertSame(-\PHP_INT_MAX, IntMath::negate(\PHP_INT_MAX));
         $this->assertSame(\PHP_INT_MAX, IntMath::negate(-\PHP_INT_MAX));
     }
 
@@ -114,7 +114,7 @@ class IntMathTest extends TestCase
     public function testAddWrapsAroundOnOverflow()
     {
         $this->assertSame(\PHP_INT_MIN, IntMath::add(PHP_INT_MAX, 1));
-        $this->assertSame(\PHP_INT_MIN, IntMath::add(PHP_INT_MAX, -1));
+        $this->assertSame(\PHP_INT_MAX, IntMath::add(PHP_INT_MIN, -1));
     }
 
     /**
@@ -266,7 +266,7 @@ class IntMathTest extends TestCase
     /**
      * @testdox The divide() method throws an exception when a division by zero occurs
      *
-     * @expectedException \InvalidArgumentException
+     * @expectedException \DivisionByZeroError
      */
     public function testDivideThrowsExceptionOnDivisionByZero()
     {
