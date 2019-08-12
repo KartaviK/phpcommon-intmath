@@ -12,14 +12,14 @@
 namespace PhpCommon\IntMath\Tests;
 
 use PhpCommon\IntMath\IntMath;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @since  1.0
  *
  * @author Marcos Passos <marcos@marcospassos.com>
  */
-class IntMathTest extends PHPUnit_Framework_TestCase
+class IntMathTest extends TestCase
 {
     public function getNonIntegerValues()
     {
@@ -43,12 +43,12 @@ class IntMathTest extends PHPUnit_Framework_TestCase
      *
      * @dataProvider getNonIntegerValues
      *
-     * @expectedException \InvalidArgumentException
-     *
      * @testdox The negate() method throws an exception if the argument is not an integer
      */
     public function testNegateThrowsAnExceptionIfTheArgumentIsNotAnInteger($value)
     {
+        $this->expectException('InvalidArgumentException');
+
         IntMath::negate($value);
     }
 
@@ -59,12 +59,12 @@ class IntMathTest extends PHPUnit_Framework_TestCase
      */
     public function testNegateReturnsTheArgumentWithOppositeSign()
     {
-        $this->assertSame(0, IntMath::negate(0));
-        $this->assertSame(0, IntMath::negate(-0));
-        $this->assertSame(-100, IntMath::negate(100));
-        $this->assertSame(100, IntMath::negate(-100));
-        $this->assertSame(-\PHP_INT_MIN, IntMath::negate(\PHP_INT_MIN));
-        $this->assertSame(\PHP_INT_MAX, IntMath::negate(-\PHP_INT_MAX));
+        $this->assertEquals(0, IntMath::negate(0));
+        $this->assertEquals(0, IntMath::negate(-0));
+        $this->assertEquals(-100, IntMath::negate(100));
+        $this->assertEquals(100, IntMath::negate(-100));
+        $this->assertEquals(-\PHP_INT_MIN, IntMath::negate(\PHP_INT_MIN));
+        $this->assertEquals(\PHP_INT_MAX, IntMath::negate(-\PHP_INT_MAX));
     }
 
     /**
@@ -74,7 +74,7 @@ class IntMathTest extends PHPUnit_Framework_TestCase
      */
     public function testNegateDoesNotNegateTheSmallestNegativeInteger()
     {
-        $this->assertSame(\PHP_INT_MIN, IntMath::negate(\PHP_INT_MIN));
+        $this->assertEquals(\PHP_INT_MIN, IntMath::negate(\PHP_INT_MIN));
     }
 
     /**
@@ -84,12 +84,12 @@ class IntMathTest extends PHPUnit_Framework_TestCase
      */
     public function testAddReturnsTheSumOfTheArguments()
     {
-        $this->assertSame(0, IntMath::add(0, 0));
-        $this->assertSame(1, IntMath::add(0, 1));
-        $this->assertSame(1, IntMath::add(1, 0));
-        $this->assertSame(0, IntMath::add(100, -100));
-        $this->assertSame(-2, IntMath::add(-1, -1));
-        $this->assertSame(4, IntMath::add(2, 2));
+        $this->assertEquals(0, IntMath::add(0, 0));
+        $this->assertEquals(1, IntMath::add(0, 1));
+        $this->assertEquals(1, IntMath::add(1, 0));
+        $this->assertEquals(0, IntMath::add(100, -100));
+        $this->assertEquals(-2, IntMath::add(-1, -1));
+        $this->assertEquals(4, IntMath::add(2, 2));
     }
 
     /**
@@ -97,12 +97,12 @@ class IntMathTest extends PHPUnit_Framework_TestCase
      *
      * @dataProvider getNonIntegerValues
      *
-     * @expectedException \InvalidArgumentException
-     *
      * @testdox The add() method throws an exception if one of the arguments is not an integer
      */
     public function testAddThrowsAnExceptionIfOneOfTheArgumentIsNotAnInteger($value)
     {
+        $this->expectException('InvalidArgumentException');
+
         IntMath::add($value, $value);
     }
 
@@ -113,8 +113,8 @@ class IntMathTest extends PHPUnit_Framework_TestCase
      */
     public function testAddWrapsAroundOnOverflow()
     {
-        $this->assertSame(\PHP_INT_MIN, IntMath::add(PHP_INT_MAX, 1));
-        $this->assertSame(\PHP_INT_MIN, IntMath::add(PHP_INT_MAX, -1));
+        $this->assertEquals(\PHP_INT_MIN, IntMath::add(PHP_INT_MAX, 1));
+        $this->assertEquals(\PHP_INT_MIN, IntMath::add(PHP_INT_MAX, -1));
     }
 
     /**
@@ -122,12 +122,12 @@ class IntMathTest extends PHPUnit_Framework_TestCase
      *
      * @dataProvider getNonIntegerValues
      *
-     * @expectedException \InvalidArgumentException
-     *
      * @testdox The subtract() method throws an exception if one of the arguments is not an integer
      */
     public function testSubtractThrowsAnExceptionIfOneOfTheArgumentIsNotAnInteger($value)
     {
+        $this->expectException('InvalidArgumentException');
+
         IntMath::subtract($value, $value);
     }
 
@@ -138,11 +138,11 @@ class IntMathTest extends PHPUnit_Framework_TestCase
      */
     public function testSubtractReturnsTheDifferenceOfTheArguments()
     {
-        $this->assertSame(0, IntMath::subtract(0, 0));
-        $this->assertSame(-1, IntMath::subtract(0, 1));
-        $this->assertSame(1, IntMath::subtract(1, 0));
-        $this->assertSame(200, IntMath::subtract(100, -100));
-        $this->assertSame(0, IntMath::subtract(-1, -1));
+        $this->assertEquals(0, IntMath::subtract(0, 0));
+        $this->assertEquals(-1, IntMath::subtract(0, 1));
+        $this->assertEquals(1, IntMath::subtract(1, 0));
+        $this->assertEquals(200, IntMath::subtract(100, -100));
+        $this->assertEquals(0, IntMath::subtract(-1, -1));
     }
 
     /**
@@ -152,9 +152,9 @@ class IntMathTest extends PHPUnit_Framework_TestCase
      */
     public function testSubtractWrapsAroundOnOverflow()
     {
-        $this->assertSame(\PHP_INT_MAX, IntMath::subtract(\PHP_INT_MIN, 1));
-        $this->assertSame(\PHP_INT_MIN, IntMath::subtract(\PHP_INT_MAX, -1));
-        $this->assertSame(-1, IntMath::subtract(\PHP_INT_MAX, \PHP_INT_MIN));
+        $this->assertEquals(\PHP_INT_MAX, IntMath::subtract(\PHP_INT_MIN, 1));
+        $this->assertEquals(\PHP_INT_MIN, IntMath::subtract(\PHP_INT_MAX, -1));
+        $this->assertEquals(-1, IntMath::subtract(\PHP_INT_MAX, \PHP_INT_MIN));
     }
 
     /**
@@ -162,36 +162,36 @@ class IntMathTest extends PHPUnit_Framework_TestCase
      *
      * @dataProvider getNonIntegerValues
      *
-     * @expectedException \InvalidArgumentException
-     *
      * @testdox The multiply() method throws an exception if one of the arguments is not an integer
      */
     public function testMultiplyThrowsAnExceptionIfOneOfTheArgumentIsNotAnInteger($value)
     {
+        $this->expectException('InvalidArgumentException');
+
         IntMath::multiply($value, $value);
     }
 
     /**
-     * @covers PhpCommon\IntMath\IntMath::multiply
+     * @covers \PhpCommon\IntMath\IntMath::multiply
      *
      * @testdox The multiply() method returns the product of the arguments
      */
     public function testMultiplyReturnsTheProductOfTheArguments()
     {
-        $this->assertSame(0, IntMath::multiply(1, 0));
-        $this->assertSame(0, IntMath::multiply(0, 1));
-        $this->assertSame(-1, IntMath::multiply(1, -1));
-        $this->assertSame(-1, IntMath::multiply(-1, 1));
-        $this->assertSame(1, IntMath::multiply(1, 1));
-        $this->assertSame(-150, IntMath::multiply(-10, 15));
-        $this->assertSame(-150, IntMath::multiply(10, -15));
-        $this->assertSame(\PHP_INT_MAX, IntMath::multiply(1, \PHP_INT_MAX));
-        $this->assertSame(-\PHP_INT_MAX, IntMath::multiply(-1, \PHP_INT_MAX));
-        $this->assertSame(-\PHP_INT_MAX, IntMath::multiply(1, -\PHP_INT_MAX));
-        $this->assertSame(0, IntMath::multiply(0, \PHP_INT_MAX));
-        $this->assertSame(0, IntMath::multiply(0, -\PHP_INT_MAX));
-        $this->assertSame(\PHP_INT_MIN, IntMath::multiply(1, \PHP_INT_MIN));
-        $this->assertSame(0, IntMath::multiply(0, \PHP_INT_MIN));
+        $this->assertEquals(0, IntMath::multiply(1, 0));
+        $this->assertEquals(0, IntMath::multiply(0, 1));
+        $this->assertEquals(-1, IntMath::multiply(1, -1));
+        $this->assertEquals(-1, IntMath::multiply(-1, 1));
+        $this->assertEquals(1, IntMath::multiply(1, 1));
+        $this->assertEquals(-150, IntMath::multiply(-10, 15));
+        $this->assertEquals(-150, IntMath::multiply(10, -15));
+        $this->assertEquals(\PHP_INT_MAX, IntMath::multiply(1, \PHP_INT_MAX));
+        $this->assertEquals(-\PHP_INT_MAX, IntMath::multiply(-1, \PHP_INT_MAX));
+        $this->assertEquals(-\PHP_INT_MAX, IntMath::multiply(1, -\PHP_INT_MAX));
+        $this->assertEquals(0, IntMath::multiply(0, \PHP_INT_MAX));
+        $this->assertEquals(0, IntMath::multiply(0, -\PHP_INT_MAX));
+        $this->assertEquals(\PHP_INT_MIN, IntMath::multiply(1, \PHP_INT_MIN));
+        $this->assertEquals(0, IntMath::multiply(0, \PHP_INT_MIN));
     }
 
     /**
@@ -201,17 +201,17 @@ class IntMathTest extends PHPUnit_Framework_TestCase
      */
     public function testMultiplyWrapsAroundOnOverflow()
     {
-        $this->assertSame(-2, IntMath::multiply(\PHP_INT_MAX, 2));
-        $this->assertSame(-2, IntMath::multiply(2, \PHP_INT_MAX));
-        $this->assertSame(2, IntMath::multiply(2, -\PHP_INT_MAX));
-        $this->assertSame(2, IntMath::multiply(-2, \PHP_INT_MAX));
-        $this->assertSame(\PHP_INT_MAX + -2, IntMath::multiply(\PHP_INT_MAX, 3));
-        $this->assertSame(\PHP_INT_MAX + -2, IntMath::multiply(3, \PHP_INT_MAX));
-        $this->assertSame(1, IntMath::multiply(\PHP_INT_MAX, \PHP_INT_MAX));
-        $this->assertSame(\PHP_INT_MIN, IntMath::multiply(\PHP_INT_MIN, 3));
-        $this->assertSame(\PHP_INT_MIN, IntMath::multiply(3, \PHP_INT_MIN));
-        $this->assertSame(\PHP_INT_MIN, IntMath::multiply(\PHP_INT_MIN, -3));
-        $this->assertSame(\PHP_INT_MIN, IntMath::multiply(-3, \PHP_INT_MIN));
+        $this->assertEquals(-2, IntMath::multiply(\PHP_INT_MAX, 2));
+        $this->assertEquals(-2, IntMath::multiply(2, \PHP_INT_MAX));
+        $this->assertEquals(2, IntMath::multiply(2, -\PHP_INT_MAX));
+        $this->assertEquals(2, IntMath::multiply(-2, \PHP_INT_MAX));
+        $this->assertEquals(\PHP_INT_MAX + -2, IntMath::multiply(\PHP_INT_MAX, 3));
+        $this->assertEquals(\PHP_INT_MAX + -2, IntMath::multiply(3, \PHP_INT_MAX));
+        $this->assertEquals(1, IntMath::multiply(\PHP_INT_MAX, \PHP_INT_MAX));
+        $this->assertEquals(\PHP_INT_MIN, IntMath::multiply(\PHP_INT_MIN, 3));
+        $this->assertEquals(\PHP_INT_MIN, IntMath::multiply(3, \PHP_INT_MIN));
+        $this->assertEquals(\PHP_INT_MIN, IntMath::multiply(\PHP_INT_MIN, -3));
+        $this->assertEquals(\PHP_INT_MIN, IntMath::multiply(-3, \PHP_INT_MIN));
     }
 
     /**
@@ -219,12 +219,12 @@ class IntMathTest extends PHPUnit_Framework_TestCase
      *
      * @dataProvider getNonIntegerValues
      *
-     * @expectedException \InvalidArgumentException
-     *
      * @testdox The divide() method throws an exception if one of the arguments is not an integer
      */
     public function testDivideThrowsAnExceptionIfOneOfTheArgumentIsNotAnInteger($value)
     {
+        $this->expectException('InvalidArgumentException');
+
         IntMath::divide($value, $value);
     }
 
@@ -235,15 +235,15 @@ class IntMathTest extends PHPUnit_Framework_TestCase
      */
     public function testDivideReturnsTheQuotientOfTheArguments()
     {
-        $this->assertSame(1, IntMath::divide(1, 1));
-        $this->assertSame(0, IntMath::divide(0, 1));
-        $this->assertSame(-1, IntMath::divide(1, -1));
-        $this->assertSame(-1, IntMath::divide(-1, 1));
-        $this->assertSame(1, IntMath::divide(10, 10));
-        $this->assertSame(-2, IntMath::divide(-20, 10));
-        $this->assertSame(-2, IntMath::divide(20, -10));
-        $this->assertSame(1, IntMath::divide(\PHP_INT_MAX, \PHP_INT_MAX));
-        $this->assertSame(1, IntMath::divide(\PHP_INT_MIN, \PHP_INT_MIN));
+        $this->assertEquals(1, IntMath::divide(1, 1));
+        $this->assertEquals(0, IntMath::divide(0, 1));
+        $this->assertEquals(-1, IntMath::divide(1, -1));
+        $this->assertEquals(-1, IntMath::divide(-1, 1));
+        $this->assertEquals(1, IntMath::divide(10, 10));
+        $this->assertEquals(-2, IntMath::divide(-20, 10));
+        $this->assertEquals(-2, IntMath::divide(20, -10));
+        $this->assertEquals(1, IntMath::divide(\PHP_INT_MAX, \PHP_INT_MAX));
+        $this->assertEquals(1, IntMath::divide(\PHP_INT_MIN, \PHP_INT_MIN));
     }
 
     /**
@@ -253,23 +253,23 @@ class IntMathTest extends PHPUnit_Framework_TestCase
      */
     public function testDivideRoundsTheResultTowardsZero()
     {
-        $this->assertSame(2, IntMath::divide(5, 2));
-        $this->assertSame(-2, IntMath::divide(-5, 2));
-        $this->assertSame(0, IntMath::divide(1, 2));
-        $this->assertSame(0, IntMath::divide(-1, 2));
-        $this->assertSame(0, IntMath::divide(1, \PHP_INT_MIN));
-        $this->assertSame(\PHP_INT_MIN, IntMath::divide(\PHP_INT_MIN, 1));
-        $this->assertSame(0, IntMath::divide(1, \PHP_INT_MAX));
-        $this->assertSame(\PHP_INT_MAX, IntMath::divide(\PHP_INT_MAX, 1));
+        $this->assertEquals(2, IntMath::divide(5, 2));
+        $this->assertEquals(-2, IntMath::divide(-5, 2));
+        $this->assertEquals(0, IntMath::divide(1, 2));
+        $this->assertEquals(0, IntMath::divide(-1, 2));
+        $this->assertEquals(0, IntMath::divide(1, \PHP_INT_MIN));
+        $this->assertEquals(\PHP_INT_MIN, IntMath::divide(\PHP_INT_MIN, 1));
+        $this->assertEquals(0, IntMath::divide(1, \PHP_INT_MAX));
+        $this->assertEquals(\PHP_INT_MAX, IntMath::divide(\PHP_INT_MAX, 1));
     }
 
     /**
-     * @expectedException \PhpCommon\IntMath\DivisionByZeroException
-     *
      * @testdox The divide() method throws an exception when a division by zero occurs
      */
     public function testDivideThrowsExceptionOnDivisionByZero()
     {
+        $this->expectException('\PhpCommon\IntMath\DivisionByZeroException');
+
         IntMath::divide(1, 0);
     }
 
@@ -280,6 +280,6 @@ class IntMathTest extends PHPUnit_Framework_TestCase
      */
     public function testDivideReturnsTheNegativeLargestIntegerOnOverflow()
     {
-        $this->assertSame(\PHP_INT_MIN, IntMath::divide(\PHP_INT_MIN, -1));
+        $this->assertEquals(\PHP_INT_MIN, IntMath::divide(\PHP_INT_MIN, -1));
     }
 }
